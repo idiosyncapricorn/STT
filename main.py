@@ -1,24 +1,26 @@
-  import speech_recognition as sr
+import speech_recognition as sr
 
-  elif user_input == '2':
-                def main():
-                    #initialize the recognaizer
-                    r = sr.Recognizer()
-                    while True:
-                        with sr.Microphone() as source:
-                            r.adjust_for_ambient_noise(source)
+def main():
+    # Initialize the recognizer
+    r = sr.Recognizer()
 
-                            print("\nplease say something....")
+    while True:
+        with sr.Microphone() as source:
+            r.adjust_for_ambient_noise(source)
+            print("\nPlease say something...")
 
-                            audio = r.listen(source)
-                            output = r.recognize_google(audio)
+            # Capture the audio input
+            audio = r.listen(source)
 
-                            try:
-                                if output == "stop":
-                                    break
-                                print(f"You said... \n{output}\n")
-                            except Exception as e:
-                                print(f"Error {str(e)}")
+            try:
+                # Convert speech to text using Google Speech Recognition
+                output = r.recognize_google(audio)
 
-                if __name__ == "__main__":
-                    main()
+                if output.lower() == "stop":
+                    break
+                print(f"You said: \n{output}\n")
+            except Exception as e:
+                print(f"Error: {str(e)}")
+
+if __name__ == "__main__":
+    main()
